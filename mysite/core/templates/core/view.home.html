@@ -1,0 +1,35 @@
+{% extends "./dashboard.html" %}
+{% block body %}
+    <h1>Dashboard</h1>
+    {% if not module_status_list %}
+        <p>Error loading dashboard.</p>
+    {% else %}
+        <table class="table table-bordered table-striped table-hover">
+          <table class="table table-bordered table-striped table-hover">
+              <thead>
+                  <tr>
+                      <th bgcolor="#aec6cf">Module Name</th>
+                      <th bgcolor="#aec6cf">Status</th>
+                      <th bgcolor="#aec6cf">Last Updated</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {% for row in module_status_list %}
+                      <tr>
+                           <td>{{ row.module_name }}</td>
+
+                           {% if row.status == 'ONLINE' %}
+                               <td style="color:#ffffff" bgcolor="#008000">{{ row.status }}</td>
+                           {% elif row.status == 'ERROR' %}
+                               <td style="color:#ffffff" bgcolor="#FF0000">{{ row.status }}</td>
+                           {% else %}
+                               <td>{{ row.status }}</td>
+                           {% endif %}
+
+                           <td>{{ row.time }}</td>
+                      </tr>
+                  {% endfor %}
+              </tbody>
+        </table>
+    {% endif %}
+{% endblock %}
